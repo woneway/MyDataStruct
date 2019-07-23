@@ -12,9 +12,9 @@ import java.util.Stack;
  * @Date: 2019/7/23 9:14
  */
 public class BinaryTree {
-    private BinaryTree left;
-    private BinaryTree right;
-    private Object data;
+    protected BinaryTree left;
+    protected BinaryTree right;
+    protected Object data;
 
     public BinaryTree() {
     }
