@@ -30,7 +30,7 @@ public class BinaryTree {
         this.right = right;
         this.data = data;
     }
-    
+
     /**
      * 先序遍历构造二叉树 深度为3
      * 此二叉树为满二叉树
@@ -50,12 +50,26 @@ public class BinaryTree {
     /**
      * 通过输入完成先序构建二叉树
      * 支持String和整型
+     * count
      */
     public void scanfCreateTree(Object type) {
+        scanfCreateTree(type, 1);
+    }
+
+    /**
+     * count指文件中输入的第count个二叉树
+     * @param type
+     * @param count
+     */
+    public void scanfCreateTree(Object type, int count) {
 //        Scanner scanner = new Scanner(System.in);
         Scanner scanner;
         if (type == String.class) {
             scanner = new Scanner(this.getClass().getResourceAsStream("/wordTreeInput.txt"));
+            while (--count > 0) {
+                while (scanner.hasNext() && !scanner.next().equals("-")) {
+                }
+            }
             String next = scanner.next();
             if (next.equals("#")) return;
             data = next;
@@ -63,6 +77,10 @@ public class BinaryTree {
             right = createTree(scanner, type);
         } else if (type == Integer.class) {
             scanner = new Scanner(this.getClass().getResourceAsStream("/numTreeInput.txt"));
+            while (count-- > 0) {
+                while (scanner.hasNext() && scanner.nextInt() != -9999) {
+                }
+            }
             int next = scanner.nextInt();
             if (next == -1) return;
             data = next;
