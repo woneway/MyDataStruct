@@ -77,7 +77,7 @@ public class BinaryTree {
             right = createTree(scanner, type);
         } else if (type == Integer.class) {
             scanner = new Scanner(this.getClass().getResourceAsStream("/numTreeInput.txt"));
-            while (count-- > 0) {
+            while (--count > 0) {
                 while (scanner.hasNext() && scanner.nextInt() != -9999) {
                 }
             }
@@ -265,10 +265,14 @@ public class BinaryTree {
         Queue<BinaryTree> queue = new LinkedList<>();
         queue.add(this);
         while (!queue.isEmpty()) {
-            BinaryTree first = queue.remove();
-            visitNode(first);
-            if (first.left != null) queue.add(first.left);
-            if (first.right != null) queue.add(first.right);
+            int len = queue.size();//当前层结点数目
+            while (len-- > 0) {
+                BinaryTree first = queue.remove();
+                visitNode(first);
+                if (first.left != null) queue.add(first.left);
+                if (first.right != null) queue.add(first.right);
+            }
+            System.out.println();
         }
     }
 
