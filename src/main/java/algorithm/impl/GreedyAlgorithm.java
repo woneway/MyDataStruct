@@ -120,12 +120,63 @@ public class GreedyAlgorithm {
     }
 
 
+    /**
+     * -----------------------
+     * ------ 1.背包问题 ------
+     * -----------------------
+     *
+     * 一、问题描述
+     * 给定n种物品，1个背包，背包容量为c,每个物品i的价值为vi，重量为wi，如何选择装入物品能使背包的总价值最大？
+     * 注意：与0-1背包问题不同，在选择物品i装入背包时，可以选择物品i的一部分，而不一定要全部装入背包，1<=i<=n
+     *
+     *
+     * 二、思路分析
+     * 制定贪心策略：
+     * 每次选择单位价值最高的物品，如果剩余背包空间(leftWeight)大于当前物品重量(wi)，则直接放入全部物品,leftWeight = leftWeight - wi；
+     * 若剩余背包空间小于当前物品重量,则选择物品的一部分放入背包，即leftWight = leftWeight - wi*p = 0(0<p<1)
+     */
+    public double getMaxValue() {
+        //1.初始化背包、物品
+        int packageSize = 100;//背包容量100kg
+        int goodsNum = 10;
+        List<Goods> goodsList = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < goodsNum; i++) {
+            double value = random.nextInt(60) + 1;
+            int weight = random.nextInt(20) + 1;
+            goodsList.add(new Goods(value, weight));
+        }
+        goodsList.sort((o1, o2) -> (int) (o1.value / o1.weight - o2.value / o2.weight));
+        int leftWeight = packageSize;
+        double totalValue = 0;
+        for (int i = 0; i < goodsNum && leftWeight > 0; i++) {
+            Goods goods = goodsList.get(i);
+            if (leftWeight - goods.weight >= 0) {
+                leftWeight -= goods.weight;
+                totalValue += goods.value;
+            } else {
+                totalValue += goods.value * (1.0 * leftWeight / goods.weight);
+                leftWeight = 0;
+            }
+        }
+        return totalValue;
+    }
 
 
+    class Goods {
+        double value;
+        int weight;
+
+        public Goods(double value, int weight) {
+            this.value = value;
+            this.weight = weight;
+        }
+    }
 
     public static void main(String[] args) {
         GreedyAlgorithm greedyAlgorithm = new GreedyAlgorithm();
         greedyAlgorithm.getMaxActivitySet(8);
+        greedyAlgorithm.getMaxValue();
     }
 
 
