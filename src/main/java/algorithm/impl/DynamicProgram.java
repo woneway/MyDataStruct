@@ -157,7 +157,7 @@ public class DynamicProgram {
                 end = len + start;
             }
         }
-        return s.substring(start, end + 1);
+        return s.substring(start, end);
     }
 
     //获取从left,right扩展的回文长度-1
@@ -173,7 +173,7 @@ public class DynamicProgram {
         DynamicProgram dynamicProgram = new DynamicProgram();
         //dynamicProgram.longestPalindrome_force("babad");
         //dynamicProgram.longestPalindrome_dp("bb");
-        dynamicProgram.longestPalindrome_center("bb");
+        dynamicProgram.longestPalindrome_center("babad");
     }
 
 }
