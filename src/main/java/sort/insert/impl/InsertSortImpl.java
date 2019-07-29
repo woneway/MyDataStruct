@@ -5,7 +5,7 @@ package sort.insert.impl;
  * @Author: woneway
  * @Date: 2019/7/28 17:10
  */
-public class InsertSort {
+public class InsertSortImpl {
     /**
      * 插入排序是指从未排序的序列中选择一个最小值或者最大值插入到已排序的序列中
      * 常见的插入类排序有：
@@ -176,7 +176,7 @@ public class InsertSort {
         int test3[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 4};
 
         int table[] = {49, 38, 65, 97, 76, 13, 27, 49};
-        InsertSort insertSort = new InsertSort();
+        InsertSortImpl insertSort = new InsertSortImpl();
         insertSort.straightInsertionSort(test);
         insertSort.binaryInsertionSort(test2);
         insertSort.shellSort(test3);
