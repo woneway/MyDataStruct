@@ -103,7 +103,23 @@ public class InsertSort {
                 tables[i].next = p;
             }
         }
-        //todo arrange
+
+        Integer p = 0, q = 0;
+        for (int i = 1; i < arr.length; i++) {
+            while (p < i) p = tables[p].next;//如果p<i，说明下一个被交换到后面去了
+            q = tables[p].next;
+
+            if (p != i) {
+                //1.交换data
+                int temData = tables[p].data;
+                tables[p].data = tables[i].data;
+                tables[i].data = temData;
+                //2.更新指针p的next指向i的next，i的next指向p的位置
+                tables[p].next = tables[i].next;
+                tables[i].next = p;
+            }
+            p = q;
+        }
     }
 
     class Table {
@@ -124,6 +140,27 @@ public class InsertSort {
     }
 
 
+    /**
+     * 希尔排序(增量递减排序)
+     * @param arr
+     */
+    public void shellSort(int[] arr) {
+        int d = 6;//每次d/2
+        int i, j;
+        while (d > 0) {
+            for (i = d; i < arr.length; i++) {
+                int cur = arr[i];
+                for (j = i - d; j >= 0; j -= d) {
+                    if (cur < arr[j]) {
+                        arr[j + d] = arr[j];
+                    } else break;
+                }
+                arr[j + d] = cur;
+            }
+            d /= 2;
+        }
+    }
+
 
     public void print(int[] arr) {
         System.out.println("输出结果:");
@@ -136,14 +173,19 @@ public class InsertSort {
     public static void main(String[] args) {
         int test[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 4};
         int test2[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 4};
+        int test3[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 4};
+
         int table[] = {49, 38, 65, 97, 76, 13, 27, 49};
         InsertSort insertSort = new InsertSort();
         insertSort.straightInsertionSort(test);
         insertSort.binaryInsertionSort(test2);
+        insertSort.shellSort(test3);
         insertSort.print(test);
         insertSort.print(test2);
+        insertSort.print(test3);
 
         insertSort.tableInsertSort(table);
+
     }
 
 
