@@ -1,11 +1,13 @@
 package sort.insert.impl;
 
+import sort.SortBasic;
+
 /**
  * @Description:
  * @Author: woneway
  * @Date: 2019/7/28 17:10
  */
-public class InsertSortImpl {
+public class InsertSortImpl extends SortBasic {
     /**
      * 插入排序是指从未排序的序列中选择一个最小值或者最大值插入到已排序的序列中
      * 常见的插入类排序有：
@@ -67,6 +69,7 @@ public class InsertSortImpl {
     /**
      * 表插入算法
      * 利用静态链表的存储结构，优化插入元素时需要移动元素的缺点
+     *
      * @param arr
      */
     public void tableInsertSort(int[] arr) {
@@ -142,6 +145,7 @@ public class InsertSortImpl {
 
     /**
      * 希尔排序(增量递减排序)
+     *
      * @param arr
      */
     public void shellSort(int[] arr) {
@@ -161,14 +165,6 @@ public class InsertSortImpl {
         }
     }
 
-
-    public void print(int[] arr) {
-        System.out.println("输出结果:");
-        for (int anArr : arr) {
-            System.out.print(anArr + " ");
-        }
-        System.out.println();
-    }
 
     public static void main(String[] args) {
         int test[] = {11, 2, 34, 7, 1, 9, 12, 11, 56, -2, 4};
