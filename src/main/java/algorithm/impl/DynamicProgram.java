@@ -81,33 +81,36 @@ public class DynamicProgram {
      * 推得 p(i,j) = p(i+1,j-1) && ai == aj
      */
     public String longestPalindrome_dp(String s) {
-        if (s == null || "".equals(s)) return s;
-        char[] chars = s.toCharArray();
-        int length = chars.length;
-        boolean[][] p = new boolean[length][length];
-        int start = 0, count = 1;
-        for (int i = 0; i < length; i++) {
-            p[i][i] = true;//len = 1
-            if (i < length - 1) {
-                p[i][i + 1] = chars[i] == chars[i + 1];//len=2
-                if (p[i][i + 1]) {
-                    start = i;
-                    count = 2;
-                }
+        int len = s.length();
+        if(len <= 1) return s;
+        boolean[][] d = new boolean[len][len];
+        int start = 0,end = 0;
+
+        for(int i = 0;i<len;i++){
+            d[i][i] = true;
+            if(i<len-1&&s.charAt(i) == s.charAt(i+1)){
+                d[i][i+1] = true;
+                start = i;
+                end = i+1;
             }
         }
-        int len = 3;
-        while (len <= length) {
-            for (int i = 0; i < length - len + 1; i++) {
-                p[i][i + len - 1] = p[i + 1][i + len - 2] && chars[i] == chars[i + len - 1];
-                if (p[i][i + len - 1]) {
+
+        int size = 3;
+
+        while (size <= len) {
+            int i = 0, j = size - 1;
+            while (j < len) {
+                if (s.charAt(i) == s.charAt(j) && d[i + 1][j - 1]) {
+                    d[i][j] = true;
                     start = i;
-                    count = len;
+                    end = j;
                 }
+                i++;
+                j++;
             }
-            len++;
+            size++;
         }
-        return new String(chars, start, count);
+        return s.substring(start,end+1);
     }
 
 
