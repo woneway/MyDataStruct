@@ -1,4 +1,4 @@
-package algorithm.impl;
+package algorithm.impl.dynamicprogram;
 
 /**
  * @Description: 动态规划算法
