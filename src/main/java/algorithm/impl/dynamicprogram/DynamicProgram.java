@@ -81,33 +81,24 @@ public class DynamicProgram {
      * 推得 p(i,j) = p(i+1,j-1) && ai == aj
      */
     public String longestPalindrome_dp(String s) {
-        if (s == null || "".equals(s)) return s;
-        char[] chars = s.toCharArray();
-        int length = chars.length;
-        boolean[][] p = new boolean[length][length];
-        int start = 0, count = 1;
-        for (int i = 0; i < length; i++) {
-            p[i][i] = true;//len = 1
-            if (i < length - 1) {
-                p[i][i + 1] = chars[i] == chars[i + 1];//len=2
-                if (p[i][i + 1]) {
-                    start = i;
-                    count = 2;
+        int s_len = s.length();
+        if (s_len<2) return s;
+        boolean[][] p = new boolean[s_len][s_len];
+
+        int start = 0, end = 0;
+        for (int i = s_len - 1; i >= 0; i--) {
+            p[i][i] = true;
+            for (int j = i + 1; j < s_len; j++) {
+                if (s.charAt(i) == s.charAt(j) && (j == i + 1 || p[i + 1][j - 1])) {
+                    p[i][j] = true;
+                    if (j - i > end - start) {
+                        start = i;
+                        end = j;
+                    }
                 }
             }
         }
-        int len = 3;
-        while (len <= length) {
-            for (int i = 0; i < length - len + 1; i++) {
-                p[i][i + len - 1] = p[i + 1][i + len - 2] && chars[i] == chars[i + len - 1];
-                if (p[i][i + len - 1]) {
-                    start = i;
-                    count = len;
-                }
-            }
-            len++;
-        }
-        return new String(chars, start, count);
+        return s.substring(start, end + 1);
     }
 
 
