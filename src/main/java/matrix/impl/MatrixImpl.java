@@ -8,6 +8,7 @@ public class MatrixImpl {
      * <p>
      * 1.矩阵的转置
      * 2.矩阵相乘
+     * 3.矩阵的压缩
      */
     /**
      * 矩阵转置的一般算法
@@ -189,6 +190,30 @@ public class MatrixImpl {
 
     }
 
+    /**
+     * 对于特殊的矩阵--对称矩阵NxN,
+     * 我们可以把他压缩到一个长度为N(N+1)/2的一维数组中
+     * <p>
+     * k = {
+     * i(i-1)/2 + j    i>=j
+     * j(j-1)/2 + i    i<j
+     * }
+     *
+     * @param matrix
+     * @return
+     */
+    public int[] zipMatrix(int[][] matrix) {
+        int N = matrix[0].length;
+
+        int[] rs = new int[N * (N + 1) / 2];
+        int k = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = i; j < N; j++) {
+                rs[k++] = matrix[i][j];
+            }
+        }
+        return rs;
+    }
 
     public static void main(String[] args) {
         TSMatrix matrix = new TSMatrix();
@@ -247,6 +272,20 @@ public class MatrixImpl {
 
 
         RLSMatrix rlsMatrix = matrixImpl.MultSMatrix(rlsMatrix1, rlsMatrix2);
+
+
+        int[][] matrix2 = new int[5][5];
+
+        matrix2[0][1] = matrix2[1][0] = 10;
+        matrix2[0][2] = matrix2[2][0] = 12;
+
+        matrix2[1][1] = matrix2[1][1] = 1;
+        matrix2[1][3] = matrix2[3][1] = 5;
+        matrix2[1][4] = matrix2[4][1] = 100;
+
+        matrix2[2][3] = matrix2[3][2] = 7;
+        matrix2[2][4] = matrix2[4][2] = 9;
+        matrixImpl.zipMatrix(matrix2);
     }
 
 }
