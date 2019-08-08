@@ -1,4 +1,4 @@
-package leetcode.impl;
+package leetcode.impl.dp;
 
 /**
  * @Description: 最小路径和
